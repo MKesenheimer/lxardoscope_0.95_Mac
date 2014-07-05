@@ -108,11 +108,11 @@ typedef struct {
 	FL_OBJECT *button_run;
 	FL_OBJECT *indicator_triggered;
 	FL_OBJECT *record;
-      FL_OBJECT *check_trigger;
-      FL_OBJECT *reference;
-      FL_OBJECT *verbose;
-      FL_OBJECT *trig_channel;
-      FL_OBJECT *trig_mode;
+    FL_OBJECT *check_trigger;
+    FL_OBJECT *reference;
+    FL_OBJECT *verbose;
+    FL_OBJECT *trig_channel;
+    FL_OBJECT *trig_mode;
 	FL_OBJECT *arrow;
 	FL_OBJECT *input;
 	FL_OBJECT *f_counter_Pos;

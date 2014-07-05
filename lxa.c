@@ -60,26 +60,26 @@ void find_tty_devices()
         pDIR=opendir("/dev");
         if(pDIR!=NULL) {
                 while (done==0) {
-                  entry = readdir(pDIR);
-                  if(entry!=NULL) {
-                        if (strncmp(entry->d_name, "ttyS", 4)== 0) {
-                              strcpy(LX.devices[i],"/dev/");
-                              strcat(LX.devices[i],entry->d_name);
-                              i++;
-                        }
-                        else if (strncmp(entry->d_name, "ttyACM", 6)== 0) {
-                              strcpy(LX.devices[i],"/dev/");
-                              strcat(LX.devices[i],entry->d_name);
-                              i++;
-                        }
-                        else if (strncmp(entry->d_name, "tty.usbserial", 13)== 0) { //new, kesenheimer
-                              strcpy(LX.devices[i],"/dev/");
-                              strncat(LX.devices[i],entry->d_name,strlen(entry->d_name)); //kesenheimer
-                              i++;
-                        }
-                        if(i>10) done=1;
-                  }
-                  else done=1;
+					entry = readdir(pDIR);
+					if(entry!=NULL) {
+               			if (strncmp(entry->d_name, "ttyS", 4)== 0) {
+                    		strcpy(LX.devices[i],"/dev/");
+							strcat(LX.devices[i],entry->d_name);
+							i++;
+               			}
+               			else if (strncmp(entry->d_name, "ttyACM", 6)== 0) {
+                    		strcpy(LX.devices[i],"/dev/");
+							strcat(LX.devices[i],entry->d_name);
+						i++;
+                		}
+               			else if (strncmp(entry->d_name, "tty.usbserial", 13)== 0) { //new, kesenheimer
+                    		strcpy(LX.devices[i],"/dev/");
+							strcat(LX.devices[i],entry->d_name);
+						i++;
+                		}
+						if(i>9) done=1;
+                	}
+					else done=1;
                 }
                 closedir(pDIR);
                 sprintf(LX.devices[0],"%d",i-1);
@@ -96,51 +96,43 @@ int init_lxa(char *device_name) {
    	find_tty_devices();
    	fl_clear_choice(lxa->droplist_dev);
    	strcpy(dname,device_name);
-      strcpy(LX.device_name,device_name);
-      //printf("[DEBUG lxa.c (1)] Device name: %s\n",dname);
 	LX.baud_rate=DEFAULT_BAUD_RATE;
   	if(strcmp(device_name,undef)==0) {     // no external input
    		fl_addto_choice(lxa->droplist_dev,undef);
    		fl_set_object_color(lxa->droplist_dev,FL_DARKORANGE,FL_INACTIVE);
-            //printf("[DEBUG lxa.c (2)] Device name: %s\n",dname);
    	}
-	else if(strlen(device_name)<9 || strlen(device_name)>30 || strncmp(device_name,tty,8)!=0) { //external input, but wrong format
+	else if(strlen(device_name)<9 || strlen(device_name)>30 || strncmp(device_name,tty,8)!=0) { //new, kesenheimer
        	printf("Error: device name %s is not valid\n",device_name); 
       	printf("       expecting string beginning with /dev/tty\n");
        	printf("please select device on lxa Graphical User Interface\n\n");
-            fl_addto_choice(lxa->droplist_dev,undef);
-            fl_set_object_color(lxa->droplist_dev,FL_DARKORANGE,FL_INACTIVE);
+        fl_addto_choice(lxa->droplist_dev,undef);
+        fl_set_object_color(lxa->droplist_dev,FL_DARKORANGE,FL_INACTIVE);
 	}
-   	else { //external input with correct format
-        if (open_dev()==0) { //error while initializing device
-            printf("can not initialize device %s\n",device_name);
+   	else {
+        if (open_dev()==0) {
+   	        printf("can not initialize device %s\n",device_name);
             fl_addto_choice(lxa->droplist_dev,undef);
             fl_set_object_color(lxa->droplist_dev,FL_DARKORANGE,FL_INACTIVE);
         }
-        else { //device initialized properly
-            printf("device %s opened properly\n",device_name);
+        else {
             fl_addto_choice(lxa->droplist_dev,device_name);
             fl_set_object_color(lxa->droplist_dev,FL_MCOL,FL_INACTIVE);
      		fl_set_timer(lxa->timer_refresh,DEFAULT_REFRESH_TIME);  
-            fl_activate_object(lxa->button_run);
-            fl_show_object(lxa->button_run);
-            fl_activate_object(lxa->verbose);
-            LX.rchunk=0;
+			fl_activate_object(lxa->button_run);
+			fl_show_object(lxa->button_run);
+			fl_activate_object(lxa->verbose);		
+	 		LX.rchunk=0;
      		LX.cchunk=0;
-            LX.threadenb=1;
-            LX.run=1;
+	 		LX.threadenb=1;
+			LX.run=1;
      		fl_deactivate_object(lxa->record);
         }
    	}
    	int nbdev=atoi(LX.devices[0]);
    	for(n=1;n<=nbdev;n++) {
-            if(strcmp(device_name,LX.devices[n])!=0) {
-               char tmp[30]; //kesenheimer
-               strncpy(tmp,LX.devices[n],28);
-               tmp[29] = '\0';
-               fl_addto_choice(lxa->droplist_dev,tmp); //längere Zeichenketten als 30 Zeichen bringen das Programm zum Absturz.
-            }
-      }
+         if(strcmp(device_name,LX.devices[n])!=0)
+         fl_addto_choice(lxa->droplist_dev,LX.devices[n]);  
+		 } 
    	fl_addto_choice(lxa->droplist_dev,tfile); 
 	LX.reference= DEFAULT_REFERENCE;
 	LX.sampling_rate=DEFAULT_SAMPLING_RATE;
@@ -188,7 +180,7 @@ int init_lxa(char *device_name) {
    	printf("** initial sampling rate set to %d\n",(int)LX.sampling_rate);
 	fl_show_object(lxa->trigger_Group);
 	fl_hide_object(lxa->filehandling_Group);
-      return 1;
+   return 1;
  }
 
 int main(int argc, char *argv[])
@@ -197,8 +189,8 @@ int main(int argc, char *argv[])
     FD_about *fd_about;
     FD_option *fd_option;
     fl_initialize(&argc,argv,"lxardoscope",0,0);
-    char msg[]="Select a port or a file to display";
-    strcpy(LX.msgdisp,msg);
+	char msg[]="Select a port or a file to display";
+	strcpy(LX.msgdisp,msg);
     fd_lxa = create_form_lxa(LX.msgdisp);
     fd_about = create_form_about();
     about=fd_about;

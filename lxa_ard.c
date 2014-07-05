@@ -145,7 +145,6 @@ int BAUD;
 		}
 	if(LX.verbose) printf("trying to open device <%s>\n",dname);
         LX.dev_h = open(dname, O_RDWR | O_NOCTTY | O_NDELAY); //| O_NONBLOCK | O_NDELAY //new, kesenheimer
-        //LX.dev_h = open("/dev/tty.usbserial-A401815A", O_RDWR | O_NOCTTY | O_NDELAY); //| O_NONBLOCK | O_NDELAY
         if (LX.dev_h<0) {perror(dname); exit(-1); }
 	if(LX.verbose) printf("success: device [%d] open\n",LX.dev_h);
         tcgetattr(LX.dev_h,&oldtio); /* save current port settings */

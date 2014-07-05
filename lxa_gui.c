@@ -515,7 +515,7 @@ fl_end_group();
     fl_set_choice_entries(obj, fdchoice_droplist_dev_0);
     fl_set_choice(obj,1);
     fl_set_object_color(obj,FL_MCOL,FL_INACTIVE);  
-    obj = fl_add_text(FL_NORMAL_TEXT,547,405,75,22,"Reference");
+	obj = fl_add_text(FL_NORMAL_TEXT,547,405,75,22,"Reference");
     fl_set_object_boxtype(obj,FL_NO_BOX);
     fl_set_object_lsize(obj,FL_SMALL_SIZE);
     fl_set_object_lalign(obj,FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
@@ -554,40 +554,40 @@ fl_end_group();
 
 FD_about *create_form_about(void)
 {
-  FL_OBJECT *obj;
-  FD_about *fdui = (FD_about *) fl_calloc(1, sizeof(*fdui));
-
-  fdui->about = fl_bgn_form(FL_NO_BOX, 380, 300);
-  obj = fl_add_box(FL_UP_BOX,0,0,380,300,"");
-  fdui->button_about_OK = obj = fl_add_button(FL_NORMAL_BUTTON,150,260,80,25,"close");
-    fl_set_object_lsize(obj,FL_NORMAL_SIZE);
-    fl_set_object_callback(obj,CB_button_about_OK,0);
-  obj = fl_add_text(FL_NORMAL_TEXT,120,10,160,40,"lxardoscope 0.95 Mac");
-    fl_set_object_lcolor(obj,FL_CHARTREUSE);
-    fl_set_object_lsize(obj,FL_MEDIUM_SIZE);
-    fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-    fl_set_object_lstyle(obj,FL_BOLD_STYLE+FL_SHADOW_STYLE);
-  obj = fl_add_text(FL_NORMAL_TEXT,40,55,300,60,"Created by Nick\n (aka Oskar Leuthold)\n in 2013.");
-    fl_set_object_lsize(obj,FL_NORMAL_SIZE);
-    fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-  obj = fl_add_text(FL_NORMAL_TEXT,40,120,300,20,"Thanks to:");
-    fl_set_object_lsize(obj,FL_NORMAL_SIZE);
-    fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-  obj = fl_add_text(FL_NORMAL_TEXT,40,140,300,20,"J. Fernando Moyano for XOSKOPE,");
-    fl_set_object_lsize(obj,FL_NORMAL_SIZE);
-    fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-  obj = fl_add_text(FL_NORMAL_TEXT,40,160,300,20,"Dr. Zhao for XFORMS library, and");
-    fl_set_object_lsize(obj,FL_NORMAL_SIZE);
-    fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-  obj = fl_add_text(FL_NORMAL_TEXT,40,180,300,20,"Tim Witham for xoscope.");
-    fl_set_object_lsize(obj,FL_NORMAL_SIZE);
-    fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-  obj = fl_add_text(FL_NORMAL_TEXT,40,200,300,60,"Ported for Mac OS X by Matthias Kesenheimer\n in 2014.");
-    fl_set_object_lsize(obj,FL_NORMAL_SIZE);
-    fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-  fl_end_form();
-  fdui->about->fdui = fdui;
-  return fdui;
+      FL_OBJECT *obj;
+      FD_about *fdui = (FD_about *) fl_calloc(1, sizeof(*fdui));
+      
+      fdui->about = fl_bgn_form(FL_NO_BOX, 380, 300);
+      obj = fl_add_box(FL_UP_BOX,0,0,380,300,"");
+      fdui->button_about_OK = obj = fl_add_button(FL_NORMAL_BUTTON,150,260,80,25,"close");
+      fl_set_object_lsize(obj,FL_NORMAL_SIZE);
+      fl_set_object_callback(obj,CB_button_about_OK,0);
+      obj = fl_add_text(FL_NORMAL_TEXT,120,10,160,40,"lxardoscope 0.95 Mac");
+      fl_set_object_lcolor(obj,FL_CHARTREUSE);
+      fl_set_object_lsize(obj,FL_MEDIUM_SIZE);
+      fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+      fl_set_object_lstyle(obj,FL_BOLD_STYLE+FL_SHADOW_STYLE);
+      obj = fl_add_text(FL_NORMAL_TEXT,40,55,300,60,"Created by Nick\n (aka Oskar Leuthold)\n in 2013.");
+      fl_set_object_lsize(obj,FL_NORMAL_SIZE);
+      fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+      obj = fl_add_text(FL_NORMAL_TEXT,40,120,300,20,"Thanks to:");
+      fl_set_object_lsize(obj,FL_NORMAL_SIZE);
+      fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+      obj = fl_add_text(FL_NORMAL_TEXT,40,140,300,20,"J. Fernando Moyano for XOSKOPE,");
+      fl_set_object_lsize(obj,FL_NORMAL_SIZE);
+      fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+      obj = fl_add_text(FL_NORMAL_TEXT,40,160,300,20,"Dr. Zhao for XFORMS library, and");
+      fl_set_object_lsize(obj,FL_NORMAL_SIZE);
+      fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+      obj = fl_add_text(FL_NORMAL_TEXT,40,180,300,20,"Tim Witham for xoscope.");
+      fl_set_object_lsize(obj,FL_NORMAL_SIZE);
+      fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+      obj = fl_add_text(FL_NORMAL_TEXT,40,200,300,60,"Ported for Mac OS X by Matthias Kesenheimer\n in 2014.");
+      fl_set_object_lsize(obj,FL_NORMAL_SIZE);
+      fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+      fl_end_form();
+      fdui->about->fdui = fdui;
+      return fdui;
 }
 
 FD_option *create_form_option(void)
