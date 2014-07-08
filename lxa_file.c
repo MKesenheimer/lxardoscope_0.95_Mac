@@ -5,6 +5,7 @@
  * LXARDOSCOPE is an Arduino based oscilloscope for Linux, using the Xforms library.
  *
  * Copyright (C) 2013 Oskar Leuthold
+ * Mac OS X Version by Matthias Kesenheimer
  * 
  * LXARDOSCOPE is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
