@@ -23,6 +23,10 @@
  * MA 02111-1307, USA.
  *
  */
+
+//new, kesenheimer
+#include <sys/time.h>
+
 # define DEFAULT_REFRESH_TIME 0.3
 // update rate for the display (seconds)
 #define DEFAULT_SAMPLING_RATE 2500
@@ -80,7 +84,7 @@ typedef struct {
  char devices[12][20]; 	// for serial port names: /dev/ttySX
  int verbose;
  char device_name[20];
- int dev_h;				// soundcard device handle
+ int dev_h;				// device handle
  int rchunk;     		// number of chunks read in
  int cchunk;     		// number of chunks copied
  int tchunk;			// number of chunks in tbuf (from 0 to 63)
@@ -154,13 +158,13 @@ extern float datx[2][DATXY_SIZE];
 extern float daty[2][DATXY_SIZE];
 extern float tbuf[2][TBUF_SIZE];   	//temp buffer for channel 0
 extern signed short rbuf[];	//read-in buffer
-extern 	char uparrow[];
-extern 	char dnarrow[];
-extern 	char *CH[2];
-extern	char tdisp[];
+extern char uparrow[];
+extern char dnarrow[];
+extern char *CH[2];
+extern char tdisp[];
 extern char msg[100];
 
-//int timeval_subtract(struct timeval *tresult, struct timeval *tx, struct timeval *ty);
+int timeval_subtract(struct timeval *tresult, struct timeval *tx, struct timeval *ty);
 int pro_display(FL_OBJECT *xyplot, int mode);
 int plot_file(FL_OBJECT *xyplot, int button);
 int open_dev();

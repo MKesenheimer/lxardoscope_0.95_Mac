@@ -80,7 +80,7 @@ ipushwheel.o: ipushwheel.c
 #*************************************************************************
 
 install:
-	echo "May be you must be root to install the software !"
+	echo "Maybe you must be root to install the software !"
 	cp -f lxardoscope $(INSTALL_LX_PATH)/bin
 
 uninstall:

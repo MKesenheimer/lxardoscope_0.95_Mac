@@ -583,7 +583,7 @@ FD_about *create_form_about(void)
       obj = fl_add_text(FL_NORMAL_TEXT,40,180,300,20,"Tim Witham for xoscope.");
       fl_set_object_lsize(obj,FL_NORMAL_SIZE);
       fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-      obj = fl_add_text(FL_NORMAL_TEXT,40,200,300,60,"Ported for Mac OS X by Matthias Kesenheimer\n in 2014.");
+      obj = fl_add_text(FL_NORMAL_TEXT,40,200,300,60,"Ported for Mac OS X by Matthias Kesenheimer\n 2014-2015.");
       fl_set_object_lsize(obj,FL_NORMAL_SIZE);
       fl_set_object_lalign(obj,FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       fl_end_form();

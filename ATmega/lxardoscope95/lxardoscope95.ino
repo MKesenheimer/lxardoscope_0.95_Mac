@@ -41,8 +41,8 @@
 int sensorValue = 0;        // value read from the port
 byte lb;
 byte hb;
-boolean ac1=false;		// Channel 1 AC amplifier off
-boolean ac2=false;		// Channel 2 AC amplifier off
+boolean ac1=false;        // Channel 1 AC amplifier off
+boolean ac2=false;        // Channel 2 AC amplifier off
 
 void setup() {
   // initialize serial communications at 115200 bps:
@@ -57,73 +57,77 @@ void setup() {
 }
 
 void loop() {
-//  if(transmit) {
-      digitalWrite(8,HIGH);
-	  if(ac1) sensorValue = analogRead(A2);
-	  else  sensorValue = analogRead(A0);           
-//        sensorValue = test;
-// shift sample by 3 bits, and select higher byte  
-      hb=highByte(sensorValue<<3); 
-// set 3 most significant bits and send out
-      Serial.write(hb|224); 
-// select lower byte and clear 3 most significant bits
-      lb=(lowByte(sensorValue))&31;
-// set bits 5 and 6 and send out
-      Serial.write(lb|96);
-//enable charge pump
-      digitalWrite(8,LOW);
-      
-      if(ac2) sensorValue = analogRead(A3);
-      else sensorValue = analogRead(A1);
-//      sensorValue = 200;
-// shift sample by 3 bits, and select higher byte 
-      hb=highByte(sensorValue<<3); 
-// set bits 5 and 6 and send out
-      Serial.write(hb|96); 
-// select lower byte and clear 3 most significant bits
-      lb=(lowByte(sensorValue))&31;
-// set bits 5 and 6 and send out
-      Serial.write(lb|96);
-//      }
+      //if(transmit) {
+      //new, send bytes only when asked -> this prevents buffer overflows!
       if(Serial.available()) {
-		char inChar = (char)Serial.read();
-		if (inChar == '1') {            // cal channel 1
-			digitalWrite(9, HIGH);      // gnd1
-			digitalWrite(11, LOW);      // AC1 off
-			ac1=false;
-		}
-		else if (inChar == '2') {     // channel 1 DC & AC, low gain
-                        digitalWrite(9, LOW);      // gnd1
-			digitalWrite(11, LOW);    // AC1 off
-			ac1=false;
-		}
-		else if (inChar == '3') {     // channel 1 use AC amplifier
-                        digitalWrite(9, LOW);      // gnd1
-			digitalWrite(11, HIGH);    // AC1 on
-			ac1=true;
-		}
-		else if (inChar == '4') {      // cal channel 2
-                        digitalWrite(10, HIGH);     // gnd2
-			digitalWrite(12, LOW);      // AC2 off
-			ac2=false;
-		}
-		else if (inChar == '5') {      // channel 2 DC & AC, low gain
-                        digitalWrite(10, LOW);     // gnd2
-			digitalWrite(12, LOW);     // AC2 off
-			ac2=false;
-		}
-		else if (inChar == '6') {      // channel 2 use AC amplifier
-			digitalWrite(10, LOW);       // gnd2
-                        digitalWrite(12, HIGH);      // AC2 on
-			ac2=true;
-		}
-                else if (inChar == '*') {
-                        digitalWrite(13, HIGH);      // LED (on)
-                }
-                else if (inChar == '#') {
-                        digitalWrite(13, LOW);      // LED (off)
-                }                
-	}
- }
+        //delayMicroseconds(10);
+        digitalWrite(8,HIGH);
+        if(ac1) sensorValue = analogRead(A2);
+        else  sensorValue = analogRead(A0);           
+
+        // shift sample by 3 bits, and select higher byte  
+        hb=highByte(sensorValue<<3); 
+        // set 3 most significant bits and send out
+        Serial.write(hb|224); 
+        // select lower byte and clear 3 most significant bits
+        lb=(lowByte(sensorValue))&31;
+        // set bits 5 and 6 and send out
+        Serial.write(lb|96);
+        //enable charge pump
+        digitalWrite(8,LOW);
+      
+        if(ac2) sensorValue = analogRead(A3);
+        else sensorValue = analogRead(A1);
+        //      sensorValue = 200;
+        // shift sample by 3 bits, and select higher byte 
+        hb=highByte(sensorValue<<3); 
+        // set bits 5 and 6 and send out
+        Serial.write(hb|96); 
+        // select lower byte and clear 3 most significant bits
+        lb=(lowByte(sensorValue))&31;
+        // set bits 5 and 6 and send out
+        Serial.write(lb|96);
+      }
+      
+      if(Serial.available()) {
+        char inChar = (char)Serial.read();
+        if (inChar == '1') {         // cal channel 1
+          digitalWrite(9, HIGH);     // gnd1
+          digitalWrite(11, LOW);     // AC1 off
+          ac1=false;
+        }
+        else if (inChar == '2') {    // channel 1 DC & AC, low gain
+          digitalWrite(9, LOW);      // gnd1
+          digitalWrite(11, LOW);     // AC1 off
+          ac1=false;
+        }
+        else if (inChar == '3') {    // channel 1 use AC amplifier
+          digitalWrite(9, LOW);      // gnd1
+          digitalWrite(11, HIGH);    // AC1 on
+          ac1=true;
+        }
+        else if (inChar == '4') {    // cal channel 2
+          digitalWrite(10, HIGH);    // gnd2
+          digitalWrite(12, LOW);     // AC2 off
+          ac2=false;
+        }
+        else if (inChar == '5') {    // channel 2 DC & AC, low gain
+          digitalWrite(10, LOW);     // gnd2
+          digitalWrite(12, LOW);     // AC2 off
+          ac2=false;
+        }
+        else if (inChar == '6') {    // channel 2 use AC amplifier
+          digitalWrite(10, LOW);     // gnd2
+          digitalWrite(12, HIGH);    // AC2 on
+          ac2=true;
+        }
+        else if (inChar == '*') {
+          digitalWrite(13, HIGH);    // LED (on)
+        }
+        else if (inChar == '#') {
+          digitalWrite(13, LOW);     // LED (off)
+        }                
+    }
+}
 
 

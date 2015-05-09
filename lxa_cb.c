@@ -23,18 +23,17 @@
  * MA 02111-1307, USA.
  *
  */
-
-#include "xforms-1.0.93sp1_ext/forms.h"
-#include "xforms-1.0.93sp1_ext/ipushwheel.h"
-#include "xforms-1.0.93sp1_ext/iscaler.h"
-#include "lxa_gui.h"
-#include "lxa.h"
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h> 
 #include <stdlib.h>
+#include "xforms-1.0.93sp1_ext/forms.h"
+#include "xforms-1.0.93sp1_ext/ipushwheel.h"
+#include "xforms-1.0.93sp1_ext/iscaler.h"
+#include "lxa_gui.h"
+#include "lxa.h"
 
 extern FD_lxa *lxa;
 extern FD_about *about;
@@ -240,7 +239,7 @@ void CB_timer_refresh(FL_OBJECT *ob, long data) {
       // 6 lxrun to collect calibration data
       // lxrun increments gndcalseq by 1 for each channel.
       // 8 DC calibration finished; display data;
-      int nb;
+      int nb = 0;
       if(CHAN.gndcalseq>0) {
          if(CHAN.gndcal1>0 && CHAN.gndcal2>0) {
 		if(CHAN.gndcalseq==1) {
