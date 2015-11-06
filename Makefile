@@ -27,11 +27,13 @@
 INSTALL_LX_PATH=/usr/local
 
 # Library paths
-LIB_X11_PATH=/usr/X11R6/lib
+#LIB_X11_PATH=/usr/X11R6/lib
+LIB_X11_PATH=/opt/X11/lib
+INC_X11_PATH=/opt/X11/include/
 
 # Compilation options
 CC=gcc
-CC_OPTIONS= -O2 -Wall -L$(LIB_X11_PATH) -D_REENTRANT
+CC_OPTIONS= -O2 -Wall -L$(LIB_X11_PATH) -I$(INC_X11_PATH) -D_REENTRANT
 
 # Linking libraries
 LIBS=./xforms-1.0.93sp1_ext/libforms.a -lX11 -lm -lpthread
